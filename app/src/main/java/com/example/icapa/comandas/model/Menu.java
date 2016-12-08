@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * Created by icapa on 8/12/16.
- * Este es el menu, está compuesto por platos
+ * Este es el menu, está compuesto por los platos de los comensales
  */
 
 public class Menu {
