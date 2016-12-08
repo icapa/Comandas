@@ -11,8 +11,8 @@ import java.util.LinkedList;
  * Objeto plato, es la unidad que conforma el menu
  */
 
-@SuppressWarnings("WeakerAccess")
-public class Dish {
+
+class Dish {
     private String mName;           // Nombre del plato
     private float mPrice;             // Tendrá un precio
     private int mPhoto;             // Asignada una foto, en string?¿?
@@ -32,7 +32,7 @@ public class Dish {
         return mName;
     }
 
-    public float getPrice() {
+    float getPrice() {
         return mPrice;
     }
 
