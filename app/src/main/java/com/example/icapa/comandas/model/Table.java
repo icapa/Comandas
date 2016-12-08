@@ -5,11 +5,13 @@ Esta clase describe el objeto mesa, que es el objeto básico
 de la sala del restaurante
  */
 
-public class Table {
+import java.io.Serializable;
+
+public class Table implements Serializable {
     private String mName;
     private int mNumber;
 
-    public Table(String name, int number) {
+    Table(String name, int number) {
         mName = name;
         mNumber = number;
     }
@@ -20,5 +22,10 @@ public class Table {
 
     public int getNumber() {
         return mNumber;
+    }
+
+    @Override
+    public String toString() {
+        return mName;
     }
 }

@@ -22,4 +22,8 @@ public class TablesRoom {
     public int getSize(){
         return mTables.size();
     }
+
+    public LinkedList<Table> getTables() {
+        return mTables;
+    }
 }
