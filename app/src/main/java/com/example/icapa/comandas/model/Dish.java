@@ -12,20 +12,26 @@ import java.util.LinkedList;
  */
 
 
-class Dish {
+public class Dish {
     private String mName;           // Nombre del plato
     private float mPrice;             // Tendrá un precio
     private int mPhoto;             // Asignada una foto, en string?¿?
     private String mObservations;   // Observaciones para el cliente
     private DishType mDishType;     // Tipo de plato, 1º, 2º o postre
     private LinkedList<Allergy> mAllergies; // Listado de alergias
+    private String mDescription;
 
-    public Dish(String name, int price, int orden, String photo) {
+    public Dish(String name, float price, int orden, String photo, String description) {
         mName = name;
         mPrice = price;
         mPhoto = ResourceUtils.getResId(photo, Drawable.class);
         mDishType = DishType.getEnumFromInt(orden);
+        mDescription = description;
         mAllergies = new LinkedList<>();
+    }
+
+    public String getDescription() {
+        return mDescription;
     }
 
     public String getName() {
