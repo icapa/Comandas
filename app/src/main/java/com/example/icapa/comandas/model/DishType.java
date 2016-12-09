@@ -2,9 +2,9 @@ package com.example.icapa.comandas.model;
 
 @SuppressWarnings("ALL")
 public enum DishType{
-    FIRST("First",1),
-    SECOND("Second",2),
-    DESSERT("Dessert",3);
+    FIRST("1º Plato",1),
+    SECOND("2º Plato",2),
+    DESSERT("Postre",3);
 
 
     private String stringValue;

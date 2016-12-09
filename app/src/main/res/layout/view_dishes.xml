@@ -37,6 +37,7 @@
                 android:id="@+id/dish_name"
                 android:text="Bacalao Mozárabe"/>
             <TextView
+                android:id="@+id/dish_order"
                 android:text="Primer plato"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

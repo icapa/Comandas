@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.icapa.comandas.R;
+import com.example.icapa.comandas.adapter.DishesRecyclerViewAdapter;
 import com.example.icapa.comandas.model.Dish;
 import com.example.icapa.comandas.model.Menu;
 
@@ -20,7 +21,7 @@ import java.util.LinkedList;
  * Created by icapa on 9/12/16.
  */
 
-public class DishesFragment extends Fragment {
+public class DishesFragment extends Fragment implements DishesRecyclerViewAdapter.OnDishClickListener {
     private static String DISHES_ARG = "DISHES_ARG";
     private LinkedList<Dish> mDishes;
     private RecyclerView mList;
@@ -65,10 +66,17 @@ public class DishesFragment extends Fragment {
         mList.setItemAnimator(new DefaultItemAnimator());
 
         // Por último RecyclerView necesita un adapter
-        mList.setAdapter(new ForecastRecyclerViewAdapter(new LinkedList<Forecast>(), getActivity(), this));
+        mList.setAdapter(new DishesRecyclerViewAdapter(new LinkedList<Dish>(),
+                getActivity(),
+                (DishesRecyclerViewAdapter.OnDishClickListener) this));
 
 
 
         return root;
+    }
+
+    @Override
+    public void onDishClick(int position, Dish forecast, View view) {
+        // Aqui ya veremos que hacemos
     }
 }
