@@ -17,7 +17,7 @@ import java.util.LinkedList;
 
 public class Menu {
 
-    private final static String MENU_URL="http://www.mocky.io/v2/584a89e71000006c0ffb019a";
+    private final static String MENU_URL="http://www.mocky.io/v2/584abf9b1000001114fb01fc";
     private static LinkedList<Dish> mDishes = new LinkedList<>();
     private LinkedList<Dish> mMenu;
     private float mTotalPrice;

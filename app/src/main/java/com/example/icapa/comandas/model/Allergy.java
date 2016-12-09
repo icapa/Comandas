@@ -11,18 +11,18 @@ import com.example.icapa.comandas.utils.ResourceUtils;
 
 class Allergy {
     private String mName;   // Nombre de la alergia
-    private int mResource;  // Recurso de la imagen de la alergia
+    private String mResource;  // Recurso de la imagen de la alergia
 
     public Allergy(String name, String resource) {
         mName = name;
-        mResource = ResourceUtils.getResId(resource, Drawable.class);
+        mResource = resource;
     }
 
     public String getName() {
         return mName;
     }
 
-    public int getResource() {
+    public String getResource() {
         return mResource;
     }
 }

@@ -1,5 +1,8 @@
 package com.example.icapa.comandas.utils;
 
+import android.app.Activity;
+import android.content.res.Resources;
+
 import java.lang.reflect.Field;
 
 /**
@@ -8,11 +11,11 @@ import java.lang.reflect.Field;
  */
 
 public class ResourceUtils {
-    public static int getResId(String resName, Class<?> c) {
+    public static int getResId(String resName, Activity activity, String pac) {
 
         try {
-            Field idField = c.getDeclaredField(resName);
-            return idField.getInt(idField);
+            int drawableResourceId = activity.getResources().getIdentifier(resName, "drawable", pac);
+            return drawableResourceId;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
