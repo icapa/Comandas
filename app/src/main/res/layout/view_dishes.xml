@@ -18,7 +18,7 @@
         android:padding="5dp"
         >
         <ImageView
-            android:background="@drawable/bacalao_mozarabe"
+
             android:id="@+id/dish_image"
             android:layout_width="50dp"
             android:layout_height="match_parent"/>
@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <ImageView
-                android:background="@drawable/alergia"
                 android:id="@+id/dish_aler"
                 android:layout_width="20dp"
                 android:layout_height="20dp"

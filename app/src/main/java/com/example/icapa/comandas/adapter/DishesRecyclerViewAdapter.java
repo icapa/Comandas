@@ -81,7 +81,9 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
             mName.setText(dish.getName());
             mOrden.setText(dish.getDishType().toString());
             mDishImage.setImageResource(ResourceUtils.getResId(dish.getPhoto(), (Activity) context,context.getPackageName()));
-
+            if (dish.getAllergies().size()!=0){
+                mAllerImage.setImageResource(R.drawable.alergia);
+            }
         }
 
         public View getView() {

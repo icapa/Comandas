@@ -13,8 +13,12 @@ class Allergy {
     private String mName;   // Nombre de la alergia
     private String mResource;  // Recurso de la imagen de la alergia
 
-    public Allergy(String name, String resource) {
+    public Allergy(String name) {
         mName = name;
+
+    }
+
+    public void setResource(String resource) {
         mResource = resource;
     }
 

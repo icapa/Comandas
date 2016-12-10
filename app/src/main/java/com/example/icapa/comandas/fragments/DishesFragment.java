@@ -26,13 +26,13 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
     private LinkedList<Dish> mDishes;
     private RecyclerView mList;
 
-    public static DishesFragment newInstance() {
+    public static DishesFragment newInstance(LinkedList<Dish> dishes) {
         DishesFragment fragment = new DishesFragment();
-        /*
+
         Bundle arguments = new Bundle();
-        arguments.putSerializable(ARG_CITY, city);
+        arguments.putSerializable(DISHES_ARG, dishes);
         fragment.setArguments(arguments);
-        */
+
         return fragment;
     }
 
@@ -66,7 +66,7 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
         mList.setItemAnimator(new DefaultItemAnimator());
 
         // Por último RecyclerView necesita un adapter
-        mList.setAdapter(new DishesRecyclerViewAdapter(new LinkedList<Dish>(),
+        mList.setAdapter(new DishesRecyclerViewAdapter(mDishes,
                 getActivity(),
                 (DishesRecyclerViewAdapter.OnDishClickListener) this));
 

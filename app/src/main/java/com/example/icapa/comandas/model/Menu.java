@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.LinkedList;
  * Este es el menu, está compuesto por los platos de los comensales
  */
 
-public class Menu {
+public class Menu implements Serializable{
 
     private final static String MENU_URL="http://www.mocky.io/v2/584abf9b1000001114fb01fc";
     private static LinkedList<Dish> mDishes = new LinkedList<>();
@@ -89,14 +90,15 @@ public class Menu {
                 int type = currentDish.getInt("orden");
                 float price = (float)currentDish.getDouble("precio");
                 JSONArray arrayAllergens = currentDish.getJSONArray("alergias");
-                ArrayList<String> allergens = new ArrayList<>();
+                LinkedList<Allergy> allergens = new LinkedList<>();
                 for (int j = 0; j < arrayAllergens.length(); j++) {
                     String currentAllergen = arrayAllergens.getString(j);
-                    allergens.add(currentAllergen);
+
+                    allergens.add(new Allergy(currentAllergen));
                 }
                 String image = currentDish.getString("foto");
 
-                Dish dish = new Dish(name,price,type,image,description);
+                Dish dish = new Dish(name,price,type,image,description,allergens);
                 mDishes.add(dish);
             }
 

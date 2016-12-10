@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 
 import com.example.icapa.comandas.utils.ResourceUtils;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.LinkedList;
  */
 
 
-public class Dish {
+public class Dish implements Serializable{
     private String mName;           // Nombre del plato
     private float mPrice;             // Tendrá un precio
     private String mPhoto;             // Asignada una foto, en string?¿?
@@ -21,13 +22,13 @@ public class Dish {
     private LinkedList<Allergy> mAllergies; // Listado de alergias
     private String mDescription;
 
-    public Dish(String name, float price, int orden, String photo, String description) {
+    public Dish(String name, float price, int orden, String photo, String description, LinkedList<Allergy> allergies) {
         mName = name;
         mPrice = price;
         mPhoto = photo;
         mDishType = DishType.getEnumFromInt(orden);
         mDescription = description;
-        mAllergies = new LinkedList<>();
+        mAllergies = allergies;
 
     }
 

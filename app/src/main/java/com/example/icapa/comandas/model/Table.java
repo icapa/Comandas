@@ -10,10 +10,12 @@ import java.io.Serializable;
 public class Table implements Serializable {
     private String mName;
     private int mNumber;
+    private Menu mMenu;
 
     Table(String name, int number) {
         mName = name;
         mNumber = number;
+        mMenu = new Menu();
     }
 
     public String getName() {
@@ -27,5 +29,9 @@ public class Table implements Serializable {
     @Override
     public String toString() {
         return mName;
+    }
+
+    public Menu getMenu() {
+        return mMenu;
     }
 }

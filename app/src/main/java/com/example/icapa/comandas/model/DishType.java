@@ -16,7 +16,7 @@ public enum DishType{
 
     @Override
     public String toString() {
-        return super.toString();
+        return stringValue;
     }
 
     public static DishType getEnumFromInt(int position){

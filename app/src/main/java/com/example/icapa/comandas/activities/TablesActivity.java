@@ -2,6 +2,7 @@ package com.example.icapa.comandas.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +48,9 @@ public class TablesActivity extends AppCompatActivity implements TablesListFragm
     @Override
     public void onTableSelectedLister(Table table, int position) {
         Log.v(TABLES_ACTIVITY,"Seleccionada mesa");
+        Intent intent = new Intent(this,MenuActivity.class);
+        intent.putExtra(MenuActivity.EXTRA_TABLE,table);
+        startActivity(intent);
     }
 
     // Extra functions
