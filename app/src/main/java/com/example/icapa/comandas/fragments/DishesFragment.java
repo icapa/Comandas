@@ -24,11 +24,9 @@ import com.example.icapa.comandas.adapter.DishesRecyclerViewAdapter;
 import com.example.icapa.comandas.model.Dish;
 import com.example.icapa.comandas.model.Menu;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-/**
- * Created by icapa on 9/12/16.
- */
 
 public class DishesFragment extends Fragment implements DishesRecyclerViewAdapter.OnDishClickListener, DishesRecyclerViewAdapter.OnDishLongClickListener {
     private static String DISHES_ARG = "DISHES_ARG";
@@ -50,8 +48,10 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            // Nos pasan argumentos, es un determinado menu
-            mDishes = (LinkedList<Dish>) getArguments().getSerializable(DISHES_ARG);
+
+
+                mDishes = (LinkedList<Dish>) getArguments().getSerializable(DISHES_ARG);
+
         }
         else{
             // No nos pasan nada, cargamos todos los platos
@@ -129,6 +129,11 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
         startActivity(intent);
 
 
+
+    }
+
+    public void setDishes(LinkedList<Dish> dishes) {
+        mDishes = dishes;
 
     }
 }
