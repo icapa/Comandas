@@ -3,8 +3,10 @@ package com.example.icapa.comandas.activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -27,6 +29,14 @@ public class TablesActivity extends AppCompatActivity implements TablesListFragm
 
         setContentView(R.layout.activity_tables);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = this.getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setTitle(R.string.table_list);
+        }
 
         // Cargamos a mano el fragment
         FragmentManager fm = getFragmentManager();

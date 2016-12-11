@@ -18,6 +18,7 @@ public enum DishType{
     public String toString() {
         return stringValue;
     }
+    public int toNumber(){return intValue;}
 
     public static DishType getEnumFromInt(int position){
         switch (position){

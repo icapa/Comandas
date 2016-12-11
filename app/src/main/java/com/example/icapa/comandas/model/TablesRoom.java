@@ -10,6 +10,10 @@ public class TablesRoom {
         mTables.add(new Table("Mesa 1",1));
         mTables.add(new Table("Mesa 2",2));
         mTables.add(new Table("Mesa 3",3));
+        mTables.add(new Table("Mesa 4",4));
+        mTables.add(new Table("Mesa 5",5));
+        mTables.add(new Table("Mesa 6",6));
+
     }
 
 

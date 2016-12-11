@@ -2,9 +2,11 @@ package com.example.icapa.comandas.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.icapa.comandas.R;
+import com.example.icapa.comandas.activities.DetailActivity;
 import com.example.icapa.comandas.activities.DishesActivity;
 import com.example.icapa.comandas.activities.MenuActivity;
 import com.example.icapa.comandas.adapter.DishesRecyclerViewAdapter;
@@ -26,7 +30,7 @@ import java.util.LinkedList;
  * Created by icapa on 9/12/16.
  */
 
-public class DishesFragment extends Fragment implements DishesRecyclerViewAdapter.OnDishClickListener {
+public class DishesFragment extends Fragment implements DishesRecyclerViewAdapter.OnDishClickListener, DishesRecyclerViewAdapter.OnDishLongClickListener {
     private static String DISHES_ARG = "DISHES_ARG";
     private LinkedList<Dish> mDishes;
     private RecyclerView mList;
@@ -73,6 +77,7 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
         // Por último RecyclerView necesita un adapter
         mList.setAdapter(new DishesRecyclerViewAdapter(mDishes,
                 getActivity(),
+                this,
                 this));
 
 
@@ -81,16 +86,49 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
     }
 
     @Override
-    public void onDishClick(int position, Dish forecast, View view) {
-        // Aqui ya veremos que hacemos
+    public void onDishClick(final int position, Dish forecast, View view) {
         Log.v("DISHES_FRAGMENT","Pulsamos un cardview");
-        // ¿Se puede desde aqui cerrar la actividad y mandar los datos?"
-        Activity activity = getActivity();
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra(DishesActivity.EXTRA_DISH,position);
-        activity.setResult(Activity.RESULT_OK,returnIntent);
+        final Activity activity = getActivity();
 
-        activity.finish();
+
+        if (activity.getClass() == DishesActivity.class) {
+            // Para meter las opciones
+            AlertDialog.Builder txtAlert = new AlertDialog.Builder(getActivity());
+            final EditText input = new EditText(getActivity());
+            txtAlert.setTitle(R.string.dish_observations);
+            txtAlert.setView(input);
+            txtAlert.setMessage(R.string.ask_observations);
+            txtAlert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String extras = input.getText().toString();
+
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra(DishesActivity.EXTRA_DISH, position);
+                    if (extras.length()>0) {
+                        returnIntent.putExtra(DishesActivity.EXTRA_OBS, extras);
+                    }
+                    activity.setResult(Activity.RESULT_OK, returnIntent);
+                    activity.finish();
+
+                }
+            });
+            txtAlert.show();
+
+
+
+        }
+
+    }
+
+    @Override
+    public void onDishLongClick(Dish dish, View view) {
+        Log.v("DISHES_FRAGMENT", "PULSACION LARGAAAA");
+        Intent intent = new Intent(getActivity(),DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_DISH,dish);
+        startActivity(intent);
+
+
 
     }
 }

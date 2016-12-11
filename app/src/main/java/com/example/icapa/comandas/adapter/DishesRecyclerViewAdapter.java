@@ -10,8 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.icapa.comandas.R;
+import com.example.icapa.comandas.activities.DishesActivity;
+import com.example.icapa.comandas.activities.MenuActivity;
 import com.example.icapa.comandas.model.Dish;
 import com.example.icapa.comandas.utils.ResourceUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 
@@ -23,12 +27,19 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
     private LinkedList<Dish> mDish;
     private Context mContext;
     private OnDishClickListener mOnDishClickListener;
+    private OnDishLongClickListener mOnDishLongClickListener;
 
-    public DishesRecyclerViewAdapter(LinkedList<Dish> dish, Context context, OnDishClickListener onDishClickListener) {
+
+
+    public DishesRecyclerViewAdapter(LinkedList<Dish> dish,
+                                     Context context,
+                                     OnDishClickListener onDishClickListener,
+                                     OnDishLongClickListener onDishLongClickListener) {
         super();
         mDish = dish;
         mContext = context;
         mOnDishClickListener = onDishClickListener;
+        mOnDishLongClickListener = onDishLongClickListener;
     }
 
 
@@ -42,12 +53,25 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
     @Override
     public void onBindViewHolder(DishesViewHolder holder, final int position) {
         holder.bindDish(mDish.get(position), mContext);
+
+        holder.getView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mOnDishLongClickListener != null) {
+                    mOnDishLongClickListener.onDishLongClick(mDish.get(position), view);
+                }
+                return true;
+            }
+        });
+
+
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mOnDishClickListener != null) {
                     mOnDishClickListener.onDishClick(position, mDish.get(position), view);
                 }
+
             }
         });
     }
@@ -66,7 +90,7 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
         private ImageView mDishImage;   // Imagen del plato
         private ImageView mAllerImage;  // Imagen del peligro si es alérgico
         private TextView mPrice;
-
+        private TextView mObservaciones;
         private View mView;
 
         public DishesViewHolder(View itemView) {
@@ -77,6 +101,7 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
             mDishImage = (ImageView) mView.findViewById(R.id.dish_image);
             mAllerImage = (ImageView) mView.findViewById(R.id.dish_aler);
             mPrice = (TextView) mView.findViewById(R.id.dish_price);
+            mObservaciones = (TextView) mView.findViewById(R.id.dish_observations);
 
         }
         public void bindDish(Dish dish,Context context){
@@ -87,6 +112,11 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
                 mAllerImage.setImageResource(R.drawable.alergia);
             }
             mPrice.setText(String.format("%.2f €",dish.getPrice()));
+            if (context instanceof MenuActivity){
+                mObservaciones.setText(dish.getObservations());
+            }
+
+
         }
 
         public View getView() {
@@ -97,6 +127,9 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
     //Interface
     public interface OnDishClickListener {
         public void onDishClick(int position, Dish forecast, View view);
+    }
+    public interface OnDishLongClickListener{
+        public void onDishLongClick(Dish dish, View view);
     }
 
 }

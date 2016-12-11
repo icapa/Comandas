@@ -18,7 +18,7 @@ import java.util.LinkedList;
 
 public class Menu implements Serializable{
 
-    private final static String MENU_URL="http://www.mocky.io/v2/584abf9b1000001114fb01fc";
+    private final static String MENU_URL="http://www.mocky.io/v2/584dcbbf0f00006620d40fbd";
     private static LinkedList<Dish> mDishes = new LinkedList<>();
     private LinkedList<Dish> mMenu;
     private float mTotalPrice;

@@ -3,4 +3,12 @@
     <string name="downloading">Downloading...</string>
     <string name="error">Error</string>
     <string name="error_downloading_menu">Error downloading menu</string>
+    <string name="total_price">Precio total</string>
+    <string name="price_format">%.2f €</string>
+    <string name="table_list">Lista de mesas</string>
+    <string name="dishes_title">Platos del dia</string>
+    <string name="alergias">Alergias:</string>
+    <string name="dish_observations">Observaciones</string>
+    <string name="ask_observations">Alguna observación?</string>
+    <string name="observaciones">Observaciones:</string>
 </resources>

@@ -6,12 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.icapa.comandas.R;
 import com.example.icapa.comandas.fragments.DishesFragment;
+import com.example.icapa.comandas.model.Dish;
 import com.example.icapa.comandas.model.Menu;
 import com.example.icapa.comandas.model.Table;
 import com.example.icapa.comandas.model.TablesRoom;
@@ -35,10 +42,24 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         // Recogemos la mesa
         setContentView(R.layout.activity_menu);
 
+
+
+
         int auxTablePosition = getIntent().getIntExtra(EXTRA_TABLE,-1);
         if (auxTablePosition != -1){
             mTable = TablesRoom.getTable(auxTablePosition);
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = this.getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setTitle(mTable.getName());
+        }
+
+
 
         FragmentManager fm = getFragmentManager();
         if (fm.findFragmentById(R.id.fragment_menu_list)==null){
@@ -77,9 +98,21 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             if (resultCode==RESULT_OK){
                 // Recogemos los datos
                 int dishSelected = data.getIntExtra(DishesActivity.EXTRA_DISH,-1);
+                String observations = data.getStringExtra(DishesActivity.EXTRA_OBS);
                 if (dishSelected>=0){
                     // Si hay un plato seleccionado
-                    mTable.getMenu().addDish(Menu.getMenu().get(dishSelected));
+                    Dish dish = Menu.getMenu().get(dishSelected);
+                    Dish newDish = new Dish(dish.getName(),
+                            dish.getPrice(),
+                            dish.getDishType().toNumber(),
+                            dish.getPhoto(),
+                            dish.getDescription(),
+                            dish.getAllergies());
+
+                    if (observations!=null && observations.length()>0){
+                        newDish.setObservations(observations);
+                    }
+                    mTable.getMenu().addDish(newDish);
 
                     recreate();
                 }
@@ -87,5 +120,35 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }else if (requestCode == Activity.RESULT_CANCELED){
             // No hacemos nada
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_table_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_total_price:
+                showTotalMenuPrice();
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void showTotalMenuPrice(){
+        View rootView = findViewById(R.id.root);
+        Toast toast = new Toast(this);
+        String priceTxt = String.format(getString(R.string.total_price)+": "+getString(R.string.price_format),mTable.getMenu().getTotalPrice());
+
+        Snackbar.make(rootView,priceTxt,Snackbar.LENGTH_LONG).show();
+
     }
 }

@@ -11,7 +11,11 @@ import java.io.Serializable;
  * Clase básica del objeto alergia
  */
 
-class Allergy implements Serializable{
+public class Allergy implements Serializable{
+    public static final String ALER_HUEVO="huevo";
+    public static final String ALER_FRUTOS_SECOS="frutos_secos";
+    public static final String ALER_MARISCO="marisco";
+
     private String mName;   // Nombre de la alergia
     private String mResource;  // Recurso de la imagen de la alergia
 
