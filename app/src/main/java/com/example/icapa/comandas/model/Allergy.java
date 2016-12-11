@@ -4,18 +4,19 @@ import android.graphics.drawable.Drawable;
 
 import com.example.icapa.comandas.utils.ResourceUtils;
 
+import java.io.Serializable;
+
 /**
  * Created by icapa on 8/12/16.
  * Clase básica del objeto alergia
  */
 
-class Allergy {
+class Allergy implements Serializable{
     private String mName;   // Nombre de la alergia
     private String mResource;  // Recurso de la imagen de la alergia
 
     public Allergy(String name) {
         mName = name;
-
     }
 
     public void setResource(String resource) {

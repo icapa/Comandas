@@ -1,16 +1,21 @@
 package com.example.icapa.comandas.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.icapa.comandas.R;
+import com.example.icapa.comandas.activities.DishesActivity;
+import com.example.icapa.comandas.activities.MenuActivity;
 import com.example.icapa.comandas.adapter.DishesRecyclerViewAdapter;
 import com.example.icapa.comandas.model.Dish;
 import com.example.icapa.comandas.model.Menu;
@@ -68,7 +73,7 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
         // Por último RecyclerView necesita un adapter
         mList.setAdapter(new DishesRecyclerViewAdapter(mDishes,
                 getActivity(),
-                (DishesRecyclerViewAdapter.OnDishClickListener) this));
+                this));
 
 
 
@@ -78,5 +83,14 @@ public class DishesFragment extends Fragment implements DishesRecyclerViewAdapte
     @Override
     public void onDishClick(int position, Dish forecast, View view) {
         // Aqui ya veremos que hacemos
+        Log.v("DISHES_FRAGMENT","Pulsamos un cardview");
+        // ¿Se puede desde aqui cerrar la actividad y mandar los datos?"
+        Activity activity = getActivity();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(DishesActivity.EXTRA_DISH,position);
+        activity.setResult(Activity.RESULT_OK,returnIntent);
+
+        activity.finish();
+
     }
 }

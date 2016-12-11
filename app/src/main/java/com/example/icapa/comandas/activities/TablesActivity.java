@@ -49,7 +49,7 @@ public class TablesActivity extends AppCompatActivity implements TablesListFragm
     public void onTableSelectedLister(Table table, int position) {
         Log.v(TABLES_ACTIVITY,"Seleccionada mesa");
         Intent intent = new Intent(this,MenuActivity.class);
-        intent.putExtra(MenuActivity.EXTRA_TABLE,table);
+        intent.putExtra(MenuActivity.EXTRA_TABLE,position);
         startActivity(intent);
     }
 

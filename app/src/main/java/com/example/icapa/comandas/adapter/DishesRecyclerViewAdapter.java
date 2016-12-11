@@ -65,6 +65,7 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
         private TextView mOrden;    // Si es primero, segundo o que
         private ImageView mDishImage;   // Imagen del plato
         private ImageView mAllerImage;  // Imagen del peligro si es alérgico
+        private TextView mPrice;
 
         private View mView;
 
@@ -75,6 +76,7 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
             mOrden = (TextView) mView.findViewById(R.id.dish_order);
             mDishImage = (ImageView) mView.findViewById(R.id.dish_image);
             mAllerImage = (ImageView) mView.findViewById(R.id.dish_aler);
+            mPrice = (TextView) mView.findViewById(R.id.dish_price);
 
         }
         public void bindDish(Dish dish,Context context){
@@ -84,6 +86,7 @@ public class DishesRecyclerViewAdapter extends RecyclerView.Adapter<DishesRecycl
             if (dish.getAllergies().size()!=0){
                 mAllerImage.setImageResource(R.drawable.alergia);
             }
+            mPrice.setText(String.format("%.2f €",dish.getPrice()));
         }
 
         public View getView() {

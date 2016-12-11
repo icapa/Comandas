@@ -40,10 +40,11 @@ public class DownloadMenu extends AsyncTask<Void,Void,LinkedList<Dish>> {
     protected LinkedList<Dish> doInBackground(Void... voids) {
         // Simular tiempo de red
         try {
-            Thread.sleep(4000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         return Menu.downloadMenu();
     }
 

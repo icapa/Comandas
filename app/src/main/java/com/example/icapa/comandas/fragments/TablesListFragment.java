@@ -27,22 +27,27 @@ public class TablesListFragment extends Fragment {
     private OnTableSelectedListener mOnCTableSelectedListener;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        if (TablesRoom.getSize()==0){
+            TablesRoom.createTables();
+        }
+
         View root = inflater.inflate(R.layout.fragment_table_list,container,false);
         ListView list = (ListView) root.findViewById(android.R.id.list);
 
         // El modelo
-        final TablesRoom tablesRoom = new TablesRoom();
+        //final TablesRoom tablesRoom = new TablesRoom();
 
         // Adaptador que pone en común el modelo y la vista
         ArrayAdapter<Table> tablesRoomArrayAdapter = new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
-                tablesRoom.getTables()
+                TablesRoom.getTables()
                 );
 
         // Fijamos el adaptador
@@ -52,7 +57,7 @@ public class TablesListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (mOnCTableSelectedListener != null){
-                    mOnCTableSelectedListener.onTableSelectedLister(tablesRoom.getTable(position),position);
+                    mOnCTableSelectedListener.onTableSelectedLister(TablesRoom.getTable(position),position);
                 }
             }
         });

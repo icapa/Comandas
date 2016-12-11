@@ -40,7 +40,7 @@ public class Dish implements Serializable{
         return mName;
     }
 
-    float getPrice() {
+    public float getPrice() {
         return mPrice;
     }
 
@@ -67,6 +67,8 @@ public class Dish implements Serializable{
     public LinkedList<Allergy> getAllergies() {
         return mAllergies;
     }
+
+
 }
 
 
